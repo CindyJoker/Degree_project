@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/hit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/scheme_page_hint"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="150dp"
+        android:textSize="22sp"
+        android:layout_marginTop="72dp"/>
+
+    <Button
+        android:id="@+id/butt_listen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/but_listening"
+        android:layout_below="@id/hit_text"/>
+
+    <Button
+        android:id="@+id/butt_recognize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/butt_listen"
+        android:layout_centerHorizontal="true"
+        android:text="@string/but_recognizing"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/butt_practice"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/butt_recognize"
+        android:text="@string/but_practice"/>
+
+</RelativeLayout>

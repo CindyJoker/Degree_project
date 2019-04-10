@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">DegreePo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="nav_personalInfo">Personal Information</string>
+    <string name="nav_database">Tone Database</string>
+    <string name="nav_difficulties">Difficulties</string>
+    <string name="nav_history">History of Search</string>
+    <string name="nav_progress">Learning Progress</string>
+    <string name="nav_scheme">Learning Scheme</string>
+    <string name="nav_sign">Sign Calender</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_contact">About Us</string>
+    <string name="nav_share">Sharing</string>
+    <string name="nav_stuffs">Developers</string>
+    <string name="butt_start">Push to record</string>
+    <string name="butt_stop">Push to stop</string>
+    <string name="butt_play">Push to play</string>
+    <string name="data_butt1">First Tone</string>
+    <string name="data_butt2">Second Tone</string>
+    <string name="data_butt3">Third Tone</string>
+    <string name="data_butt4">Forth Tone</string>
+    <string name="scheme_page_hint">Choose your prefer learning scheme</string>
+    <string name="but_listening">Listening</string>
+    <string name="but_recognizing">Recognizing</string>
+    <string name="but_practice">Practicing</string>
+</resources>

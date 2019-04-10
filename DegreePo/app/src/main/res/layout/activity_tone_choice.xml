@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:id="@+id/layout1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/data_butt_tone1"
+                android:layout_width="match_parent"
+                android:layout_height="144dp"
+                android:layout_weight="1"
+                android:text="@string/data_butt1"
+                android:layout_margin="16dp"/>
+
+            <Button
+                android:id="@+id/data_butt_tone2"
+                android:layout_width="match_parent"
+                android:layout_height="144dp"
+                android:layout_weight="1"
+                android:layout_margin="16dp"
+                android:text="@string/data_butt2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="horizontal"
+            android:layout_below="@id/layout1">
+
+            <Button
+                android:id="@+id/data_butt_tone3"
+                android:layout_width="match_parent"
+                android:layout_height="144dp"
+                android:layout_weight="1"
+                android:text="@string/data_butt3"
+                android:layout_margin="16dp"/>
+
+            <Button
+                android:id="@+id/data_butt_tone4"
+                android:layout_width="match_parent"
+                android:layout_height="144dp"
+                android:text="@string/data_butt4"
+                android:layout_weight="1"
+                android:layout_margin="16dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
