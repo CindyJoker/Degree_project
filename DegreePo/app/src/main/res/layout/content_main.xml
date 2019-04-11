@@ -8,13 +8,29 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <SearchView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:queryHint="Search for tones"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:queryHint="Search for tones"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hope this app can help you"
+            android:textSize="20sp"
+            android:layout_margin="16dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/search_view"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -146,6 +147,18 @@ public class Recognizing extends Activity {
     public void playBack(){
         Intent practice = new Intent(Recognizing.this, Recording.class);
         startActivity(practice);
+        /*try{
+            recogMediaPlayer = new MediaPlayer();
+            recogMediaPlayer.reset();
+            recogMediaPlayer.setDataSource(file.getAbsolutePath());
+            recogMediaPlayer.prepareAsync();
+            recogMediaPlayer.start();
+            Toast.makeText(this, file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        if (recogMediaPlayer.isPlaying())
+            Toast.makeText(this, "Playing", Toast.LENGTH_SHORT).show();*/
     }
 
     // TODO(19): Change image randomly
@@ -186,7 +199,7 @@ public class Recognizing extends Activity {
 
     // Get file name
     private String getFileName(){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         Date date = new Date(System.currentTimeMillis());
         String fileName = simpleDateFormat.format(date);
         fileName = "Your record "+ fileName;

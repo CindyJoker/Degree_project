@@ -182,7 +182,7 @@ public class Recording extends Activity implements RecordFilesAdapter.RecordFile
 
     // Get current date and time
     private String getCurrentDateAndTime(){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         Date date = new Date(System.currentTimeMillis());
         String dat = simpleDateFormat.format(date);
         return dat;
@@ -261,6 +261,11 @@ public class Recording extends Activity implements RecordFilesAdapter.RecordFile
     @Override
     public void AdapterOnClick(String fileName) {
         //TODO(10): Click, play the recording
+        //Toast.makeText(this, fileName, Toast.LENGTH_SHORT).show();
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
         playRecords(fileName);
     }
 
