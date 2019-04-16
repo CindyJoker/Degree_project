@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity
                 //TODO(11): Turn to the scheme choose page
                 Intent schemePage = new Intent(MainActivity.this, SchemePage.class);
                 startActivity(schemePage);
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

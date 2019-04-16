@@ -17,11 +17,11 @@
         <item
             android:id="@+id/nav_difficulties"
             android:icon="@drawable/ic_grade"
-            android:title="@string/nav_difficulties" />
+            android:title="@string/nav_difficulties" />-->
         <item
             android:id="@+id/nav_history"
             android:icon="@drawable/ic_restore"
-            android:title="@string/nav_history"/> -->
+            android:title="@string/nav_history"/>
         <item
             android:id="@+id/nav_progress"
             android:icon="@drawable/ic_trending_up"

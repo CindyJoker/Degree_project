@@ -1,12 +1,15 @@
 package com.example.android.degreepo;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
+import android.graphics.Typeface;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -15,25 +18,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-public class Recognizing extends Activity {
+public class Recognizing extends AppCompatActivity {
 
     private ImageView toneImage;
     private ImageButton img_butt_start, img_butt_pause, img_butt_next;
     private Button listenBack;
-    private MediaPlayer recogMediaPlayer;
     private MediaRecorder recogMediaRecorder;
     private boolean isRecording = false;
-    private TextView yourScore, highestScore;
+    private int flag = 0;
+    private TextView yourScore, highestScore, recog_yourScore, recog_highestScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recognizing);
+
+        // Set font
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.signikanegative_regular);
+
+        recog_yourScore = findViewById(R.id.recog_your_score);
+        recog_highestScore = findViewById(R.id.recog_highest_score);
+
+        recog_yourScore.setTypeface(typeface);
+        recog_highestScore.setTypeface(typeface);
 
         initButtons();
         setOnclickListener();
@@ -45,29 +56,39 @@ public class Recognizing extends Activity {
     public void initButtons(){
         img_butt_start = findViewById(R.id.recog_play);
         img_butt_start.setEnabled(true);
-        img_butt_pause = findViewById(R.id.recog_stop);
-        img_butt_pause.setEnabled(false);
+        //img_butt_pause = findViewById(R.id.recog_stop);
+        //img_butt_pause.setEnabled(false);
         img_butt_next = findViewById(R.id.recog_next);
         listenBack = findViewById(R.id.butt_play_back);
     }
 
     // Set onClickListener
+    @SuppressLint("ClickableViewAccessibility")
     public void setOnclickListener(){
 
         // Click to start record, stop record and replay
         img_butt_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startRecording();
+                switch (flag){
+                    case 0:
+                        flag = 1;
+                        startRecording();
+                        break;
+                    case 1:
+                        flag = 0;
+                        stopRecording();
+                        break;
+                }
             }
         });
 
-        img_butt_pause.setOnClickListener(new View.OnClickListener() {
+        /*img_butt_pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopRecording();
             }
-        });
+        });*/
 
         img_butt_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,8 +144,8 @@ public class Recognizing extends Activity {
             isRecording = true;
             recogMediaRecorder.prepare();
             recogMediaRecorder.start();
-            img_butt_start.setEnabled(false);
-            img_butt_pause.setEnabled(true);
+            img_butt_start.setActivated(true);
+            //img_butt_pause.setEnabled(true);
             Toast.makeText(Recognizing.this, "Start recording",Toast.LENGTH_SHORT).show();
 
         }catch (Exception e){
@@ -138,8 +159,8 @@ public class Recognizing extends Activity {
         recogMediaRecorder.release();
         recogMediaRecorder = null;
         isRecording = false;
-        img_butt_start.setEnabled(true);
-        img_butt_pause.setEnabled(false);
+        img_butt_start.setActivated(false);
+        //img_butt_pause.setEnabled(false);
         Toast.makeText(Recognizing.this, "Recording end", Toast.LENGTH_SHORT).show();
     }
 
@@ -147,18 +168,6 @@ public class Recognizing extends Activity {
     public void playBack(){
         Intent practice = new Intent(Recognizing.this, Recording.class);
         startActivity(practice);
-        /*try{
-            recogMediaPlayer = new MediaPlayer();
-            recogMediaPlayer.reset();
-            recogMediaPlayer.setDataSource(file.getAbsolutePath());
-            recogMediaPlayer.prepareAsync();
-            recogMediaPlayer.start();
-            Toast.makeText(this, file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        if (recogMediaPlayer.isPlaying())
-            Toast.makeText(this, "Playing", Toast.LENGTH_SHORT).show();*/
     }
 
     // TODO(19): Change image randomly
@@ -166,12 +175,14 @@ public class Recognizing extends Activity {
 
         toneImage = findViewById(R.id.random_image);
         int images[] = {
-                R.drawable.tone1, R.drawable.tone2,
-                R.drawable.tone3, R.drawable.tone4
+                R.drawable.ma1, R.drawable.ma2,
+                R.drawable.ma3, R.drawable.ma4,
+                R.drawable.bai1, R.drawable.bai2,
+                R.drawable.bai3, R.drawable.bai4
         };
 
         Random random = new Random();
-        int index = random.nextInt(4);
+        int index = random.nextInt(8);
 
         toneImage.setImageResource(images[index]);
     }

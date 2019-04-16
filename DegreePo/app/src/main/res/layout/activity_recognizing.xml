@@ -2,91 +2,115 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/random_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        />
-
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/random_image"
-        android:id="@+id/image_butts">
+        android:id="@+id/img_next">
 
-        <ImageButton
-            android:id="@+id/recog_play"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@mipmap/play_butt"/>
-
-        <ImageButton
-            android:id="@+id/recog_stop"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@mipmap/pause"
-            android:layout_marginLeft="30dp"
-            android:layout_toRightOf="@id/recog_play"/>
+        <ImageView
+            android:id="@+id/random_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:background="#3fd2fc"
+            android:src="@drawable/ma1"
+            android:padding="4dp"/>
 
         <ImageButton
             android:id="@+id/recog_next"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_toRightOf="@id/recog_stop"
-            android:layout_marginLeft="30dp"
-            android:src="@mipmap/next"/>
+            android:layout_toRightOf="@id/random_image"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/nextbutt"/>
+
     </RelativeLayout>
 
 
+    <ImageButton
+        android:id="@+id/recog_play"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@id/img_next"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/butt_select"/>
+
     <TextView
-        android:id="@+id/recog_your_score"
+        android:id="@+id/recog_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your score"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        android:layout_below="@id/image_butts"/>
+        android:text="Click to record"
+        android:textColor="#3fd2fc"
+        android:layout_below="@id/recog_play"
+        android:layout_centerHorizontal="true"/>
 
-    <TextView
-        android:id="@+id/recog_highest_score"
+
+    <RelativeLayout
+        android:id="@+id/recog_scores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Highest score"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="16dp"
-        android:layout_toRightOf="@id/recog_your_score"
-        android:textSize="18sp"
-        android:layout_below="@id/image_butts"/>
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/recog_hint"
+        android:layout_marginTop="16dp">
 
-    <TextView
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/recog_score"
-        android:padding="16dp"
-        android:layout_marginLeft="32dp"
-        android:textSize="24sp"
-        android:layout_below="@id/recog_your_score"/>
+        <TextView
+            android:id="@+id/recog_your_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your score"
+            android:textSize="18sp" />
 
-    <TextView
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/highest_score"
-        android:padding="16dp"
-        android:layout_toRightOf="@id/recog_score"
-        android:layout_marginLeft="70dp"
-        android:textSize="24sp"
-        android:layout_below="@id/recog_highest_score"/>
+        <TextView
+            android:id="@+id/recog_highest_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:layout_toRightOf="@id/recog_your_score"
+            android:text="Highest score"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/recog_score"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recog_your_score"
+            android:padding="16dp"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/highest_score"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recog_highest_score"
+            android:layout_marginLeft="37dp"
+            android:layout_toRightOf="@id/recog_score"
+            android:padding="16dp"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+
 
     <Button
         android:id="@+id/butt_play_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Listen to your record"
-        android:layout_below="@id/recog_score"
+        android:layout_below="@id/recog_detail"
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/recog_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Details"
+        android:layout_below="@id/recog_scores"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
 
 </RelativeLayout>
