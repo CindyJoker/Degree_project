@@ -19,7 +19,6 @@
     <string name="nav_stuffs">Developers</string>
     <string name="butt_start">Push to record</string>
     <string name="butt_stop">Push to stop</string>
-    <string name="butt_play">Push to play</string>
     <string name="data_butt1">First Tone</string>
     <string name="data_butt2">Second Tone</string>
     <string name="data_butt3">Third Tone</string>
@@ -28,4 +27,12 @@
     <string name="but_listening">Listening</string>
     <string name="but_recognizing">Recognizing</string>
     <string name="but_practice">Practicing</string>
+    <string name="click_hint_start">Click to record</string>
+    <string name="click_hint_stop">Click to stop</string>
+    <string name="your_score">Your Score</string>
+    <string name="high_score">Highest Score</string>
+    <string name="detail">Details</string>
+    <string name="Listen_back">Listen to your recording</string>
+    <string name="listen_practice">Click to listen to recording and choose the correct tone</string>
+    <string name="listen_hint">Click listen button and you can practice random tones</string>
 </resources>

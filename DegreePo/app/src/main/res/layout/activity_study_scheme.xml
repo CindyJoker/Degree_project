@@ -10,7 +10,8 @@
         android:text="@string/scheme_page_hint"
         android:layout_centerHorizontal="true"
         android:layout_marginVertical="150dp"
-        android:textSize="22sp"
+        android:textSize="18sp"
+        android:textColor="#3fd2fc"
         android:layout_marginTop="72dp"/>
 
     <Button

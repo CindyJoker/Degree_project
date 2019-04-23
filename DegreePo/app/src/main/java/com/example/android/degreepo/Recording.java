@@ -1,32 +1,26 @@
 package com.example.android.degreepo;
-
-
-import android.app.Activity;
-import android.media.AudioManager;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.SystemClock;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.PopupMenu;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Recording extends Activity implements RecordFilesAdapter.RecordFilesOnClickListener {
+public class Recording extends AppCompatActivity implements RecordFilesAdapter.RecordFilesOnClickListener {
 
-    private Button butt_start;
-    private Button butt_stop;
+    private ImageButton butt_start;
     private MediaRecorder mediaRecorder;
     private MediaPlayer mediaPlayer;
     private boolean isRecording;
@@ -34,6 +28,9 @@ public class Recording extends Activity implements RecordFilesAdapter.RecordFile
     private RecordFilesAdapter rAdepter;
     private RecyclerView rfileLists;
     private String[] rFileName;
+
+    private TextView recordHint;
+    int flag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +42,10 @@ public class Recording extends Activity implements RecordFilesAdapter.RecordFile
 
         InitialButtons();
 
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.signikanegative_regular);
+        recordHint = findViewById(R.id.record_hint);
+        recordHint.setTypeface(typeface);
+
         setOnClickListener();
         showFiles();
 
@@ -54,9 +55,7 @@ public class Recording extends Activity implements RecordFilesAdapter.RecordFile
     private void InitialButtons(){
 
         butt_start = findViewById(R.id.butt_record);
-        butt_stop = findViewById(R.id.butt_stop);
-
-        butt_stop.setEnabled(false);
+        butt_start.setEnabled(true);
 
     }
 
@@ -102,14 +101,18 @@ public class Recording extends Activity implements RecordFilesAdapter.RecordFile
         butt_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startRecord();
-            }
-        });
-
-        butt_stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopRecord();
+                switch (flag){
+                    case 0:
+                        flag = 1;
+                        startRecord();
+                        recordHint.setText(R.string.butt_stop);
+                        break;
+                    case 1:
+                        flag = 0;
+                        stopRecord();
+                        recordHint.setText(R.string.butt_start);
+                        break;
+                }
             }
         });
 
@@ -156,8 +159,7 @@ public class Recording extends Activity implements RecordFilesAdapter.RecordFile
         mediaRecorder.release();
         mediaRecorder = null;
         isRecording = false;
-        butt_start.setEnabled(true);
-        butt_stop.setEnabled(false);
+        butt_start.setActivated(false);
         Toast.makeText(Recording.this, "Recording end", Toast.LENGTH_SHORT).show();
         showFiles();
 
@@ -210,8 +212,7 @@ public class Recording extends Activity implements RecordFilesAdapter.RecordFile
             isRecording = true;
             mediaRecorder.prepare();
             mediaRecorder.start();
-            butt_start.setEnabled(false);
-            butt_stop.setEnabled(true);
+            butt_start.setActivated(true);
             Toast.makeText(Recording.this, "Start recording",Toast.LENGTH_SHORT).show();
 
         }catch (Exception e){

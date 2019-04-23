@@ -8,17 +8,30 @@
         android:layout_centerVertical="true">
 
         <ImageButton
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:id="@+id/listen_play"
+            android:src="@drawable/buttlisten"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/listen_practice"
+            android:layout_below="@id/listen_play"
             android:layout_centerHorizontal="true"
-            android:id="@+id/listen_play"
-            android:src="@mipmap/play_butt"/>
+            android:textColor="#3fd2fc"
+            android:layout_marginTop="16dp"
+            />
 
         <com.example.android.degreepo.CustomAPI.NestedRadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/listen_group"
             android:layout_below="@id/listen_play"
+            android:layout_marginTop="64dp"
             android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 
@@ -36,7 +49,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/rbutt1"
+                    android:layout_toEndOf="@id/rbutt1"
                     android:src="@mipmap/t1"/>
 
             </RelativeLayout>
@@ -93,14 +106,31 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/rbutt4"
+                    android:layout_toEndOf="@id/rbutt4"
                     android:src="@mipmap/t4"/>
 
             </RelativeLayout>
 
         </com.example.android.degreepo.CustomAPI.NestedRadioGroup>
 
+        <TextView
+            android:id="@+id/listen_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/listen_group"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textSize="20sp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/listen_result"
+            android:text="@string/listen_hint"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:textColor="#3fd2fc"/>
 
     </RelativeLayout>
 

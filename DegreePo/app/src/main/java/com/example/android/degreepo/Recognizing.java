@@ -1,7 +1,6 @@
 package com.example.android.degreepo;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.MediaRecorder;
@@ -9,28 +8,45 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+/*
+import com.mathworks.toolbox.javabuilder.MWCharArray;
+import com.mathworks.toolbox.javabuilder.MWClassID;
+import com.mathworks.toolbox.javabuilder.MWException;
+import com.mathworks.toolbox.javabuilder.MWNumericArray;
+*/
+import com.mathworks.toolbox.javabuilder.MWCharArray;
+import com.mathworks.toolbox.javabuilder.MWClassID;
+import com.mathworks.toolbox.javabuilder.MWComplexity;
+import com.mathworks.toolbox.javabuilder.MWException;
+import com.mathworks.toolbox.javabuilder.MWNumericArray;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
+
+import DrawLineChart.LineChart;
+import FinalPro.finalPro;
+
+//import finalpro.pro;
 
 public class Recognizing extends AppCompatActivity {
 
     private ImageView toneImage;
-    private ImageButton img_butt_start, img_butt_pause, img_butt_next;
-    private Button listenBack;
+    private ImageButton img_butt_start, img_butt_next;
+    private Button listenBack, recogDetail;
     private MediaRecorder recogMediaRecorder;
     private boolean isRecording = false;
     private int flag = 0;
-    private TextView yourScore, highestScore, recog_yourScore, recog_highestScore;
+    private TextView yourScore, highestScore, recog_yourScore, recog_highestScore, recordingHint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -40,11 +56,9 @@ public class Recognizing extends AppCompatActivity {
         // Set font
         Typeface typeface = ResourcesCompat.getFont(this, R.font.signikanegative_regular);
 
-        recog_yourScore = findViewById(R.id.recog_your_score);
-        recog_highestScore = findViewById(R.id.recog_highest_score);
+        initTextView(typeface);
 
-        recog_yourScore.setTypeface(typeface);
-        recog_highestScore.setTypeface(typeface);
+        recordingHint = findViewById(R.id.recog_hint);
 
         initButtons();
         setOnclickListener();
@@ -56,10 +70,22 @@ public class Recognizing extends AppCompatActivity {
     public void initButtons(){
         img_butt_start = findViewById(R.id.recog_play);
         img_butt_start.setEnabled(true);
-        //img_butt_pause = findViewById(R.id.recog_stop);
-        //img_butt_pause.setEnabled(false);
         img_butt_next = findViewById(R.id.recog_next);
         listenBack = findViewById(R.id.butt_play_back);
+        recogDetail = findViewById(R.id.recog_detail);
+    }
+
+    // Init text view
+    public void initTextView(Typeface typeface){
+        recog_yourScore = findViewById(R.id.recog_your_score);
+        recog_highestScore = findViewById(R.id.recog_highest_score);
+        yourScore = findViewById(R.id.recog_score);
+        highestScore = findViewById(R.id.highest_score);
+
+        recog_yourScore.setTypeface(typeface);
+        recog_highestScore.setTypeface(typeface);
+        yourScore.setTypeface(typeface);
+        highestScore.setTypeface(typeface);
     }
 
     // Set onClickListener
@@ -74,21 +100,21 @@ public class Recognizing extends AppCompatActivity {
                     case 0:
                         flag = 1;
                         startRecording();
+                        recordingHint.setText(R.string.click_hint_stop);
                         break;
                     case 1:
                         flag = 0;
                         stopRecording();
+                        try {
+                            showScore();
+                        } catch (MWException e) {
+                            e.printStackTrace();
+                        }
+                        recordingHint.setText(R.string.click_hint_start);
                         break;
                 }
             }
         });
-
-        /*img_butt_pause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopRecording();
-            }
-        });*/
 
         img_butt_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +130,15 @@ public class Recognizing extends AppCompatActivity {
 
                 // Just play at practicing page at this time
                 playBack();
+            }
+        });
+
+        recogDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO(21): Look the diagram of recording
+                // Turn to new activity
+                Intent recog_detail = new Intent();
             }
         });
 
@@ -145,7 +180,6 @@ public class Recognizing extends AppCompatActivity {
             recogMediaRecorder.prepare();
             recogMediaRecorder.start();
             img_butt_start.setActivated(true);
-            //img_butt_pause.setEnabled(true);
             Toast.makeText(Recognizing.this, "Start recording",Toast.LENGTH_SHORT).show();
 
         }catch (Exception e){
@@ -160,7 +194,6 @@ public class Recognizing extends AppCompatActivity {
         recogMediaRecorder = null;
         isRecording = false;
         img_butt_start.setActivated(false);
-        //img_butt_pause.setEnabled(false);
         Toast.makeText(Recognizing.this, "Recording end", Toast.LENGTH_SHORT).show();
     }
 
@@ -215,6 +248,49 @@ public class Recognizing extends AppCompatActivity {
         String fileName = simpleDateFormat.format(date);
         fileName = "Your record "+ fileName;
         return fileName;
+    }
+
+    Double score;
+    // Show your scores
+    private void showScore() throws MWException {
+        // TODO(20): Get drawable resource name
+        finalPro f = new finalPro();
+        Object[] grade;
+        // Get tone
+        String imgName = getResources().getResourceName(toneImage.getId());
+        int lastDigit = imgName.charAt(imgName.length()-1);
+
+        // Get path of this recording file
+        if (file != null) {
+            String path = file.getAbsolutePath();
+            MWNumericArray tone = new MWNumericArray(lastDigit, MWClassID.INT16);
+            MWCharArray p = new MWCharArray(path);
+            Object[] o = new Object[2];
+            o[0] = p;
+            o[1] = tone;
+            grade = f.finalpro(1, o);
+            yourScore.setText(grade.toString());
+            score = Double.parseDouble(grade.toString());
+        }
+    }
+
+    private Queue<Double> queue = new LinkedList<Double>();
+    // Show line chart
+    private void showLineChart() throws MWException {
+        // Queue<Double> queue = new LinkedList<Double>();
+        queue.offer(score);
+
+        int[] dims = { 1, queue.size() };
+        LineChart f = new LineChart();
+        int j=1;
+        MWNumericArray input = MWNumericArray.newInstance(dims, MWClassID.DOUBLE,
+                MWComplexity.REAL);
+        for(Double q : queue) {
+            input.set(j, q);
+            j++;
+        }
+        f.DrawLineChart(input);
+        f.waitForFigures();
     }
 
 }

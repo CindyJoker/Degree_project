@@ -16,16 +16,29 @@
             android:background="#3fd2fc"
             android:src="@drawable/ma1"
             android:padding="4dp"/>
-
-        <ImageButton
-            android:id="@+id/recog_next"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_toRightOf="@id/random_image"
             android:layout_centerVertical="true"
-            android:background="@android:color/transparent"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/nextbutt"/>
+            android:layout_marginLeft="16dp">
+
+            <ImageButton
+                android:id="@+id/recog_next"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/nextbutt"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recog_next"
+                android:text="Click to next"
+                android:textColor="#3fd2fc"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -44,7 +57,7 @@
         android:id="@+id/recog_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click to record"
+        android:text="@string/click_hint_start"
         android:textColor="#3fd2fc"
         android:layout_below="@id/recog_play"
         android:layout_centerHorizontal="true"/>
@@ -62,16 +75,16 @@
             android:id="@+id/recog_your_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your score"
+            android:text="@string/your_score"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/recog_highest_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="120dp"
-            android:layout_toRightOf="@id/recog_your_score"
-            android:text="Highest score"
+            android:layout_marginStart="120dp"
+            android:layout_toEndOf="@id/recog_your_score"
+            android:text="@string/high_score"
             android:textSize="18sp" />
 
         <TextView
@@ -87,8 +100,8 @@
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/recog_highest_score"
-            android:layout_marginLeft="37dp"
-            android:layout_toRightOf="@id/recog_score"
+            android:layout_marginStart="37dp"
+            android:layout_toEndOf="@id/recog_score"
             android:padding="16dp"
             android:textSize="24sp" />
 
@@ -99,7 +112,9 @@
         android:id="@+id/butt_play_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Listen to your record"
+        android:text="@string/Listen_back"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/butt_shape"
         android:layout_below="@id/recog_detail"
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"/>
@@ -108,7 +123,9 @@
         android:id="@+id/recog_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Details"
+        android:text="@string/detail"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/butt_shape"
         android:layout_below="@id/recog_scores"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>

@@ -1,12 +1,15 @@
 package com.example.android.degreepo;
 
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.degreepo.CustomAPI.NestedRadioGroup;
@@ -21,6 +24,8 @@ public class Listening extends AppCompatActivity {
     private ImageButton imageButton;
     private MediaPlayer lmediaPlayer;
 
+    private TextView listenResult;
+
     private int[] tones = {R.raw.s1, R.raw.s2, R.raw.s3, R.raw.s4};
     private int num = 4;
 
@@ -28,6 +33,10 @@ public class Listening extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listening);
+
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.signikanegative_regular);
+        listenResult = findViewById(R.id.listen_result);
+        listenResult.setTypeface(typeface);
 
         setButtons();
         setClickEvent();
@@ -98,27 +107,27 @@ public class Listening extends AppCompatActivity {
             switch (count+1){
                 case 1:
                     if (checkedId == R.id.rbutt1)
-                        Toast.makeText(Listening.this, "Excellent", Toast.LENGTH_SHORT).show();
+                        listenResult.setText("Excellent! You can try the next");
                     else
-                        Toast.makeText(Listening.this, "Please try again", Toast.LENGTH_SHORT).show();
+                        listenResult.setText("Sorry~ Please try again");
                     break;
                 case 2:
                     if (checkedId == R.id.rbutt2)
-                        Toast.makeText(Listening.this, "Excellent", Toast.LENGTH_SHORT).show();
+                        listenResult.setText("Excellent! You can try the next");
                     else
-                        Toast.makeText(Listening.this, "Please try again", Toast.LENGTH_SHORT).show();
+                        listenResult.setText("Sorry~ Please try again");
                     break;
                 case 3:
                     if (checkedId == R.id.rbutt3)
-                        Toast.makeText(Listening.this, "Excellent", Toast.LENGTH_SHORT).show();
+                        listenResult.setText("Excellent! You can try the next");
                     else
-                        Toast.makeText(Listening.this, "Please try again", Toast.LENGTH_SHORT).show();
+                        listenResult.setText("Sorry~ Please try again");
                     break;
                 case 4:
                     if (checkedId == R.id.rbutt4)
-                        Toast.makeText(Listening.this, "Excellent", Toast.LENGTH_SHORT).show();
+                        listenResult.setText("Excellent! You can try the next");
                     else
-                        Toast.makeText(Listening.this, "Please try again", Toast.LENGTH_SHORT).show();
+                        listenResult.setText("Sorry~ Please try again");
                     break;
             }
         }

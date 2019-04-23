@@ -17,22 +17,22 @@
 
     </FrameLayout>
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/butt_record"
-        android:layout_alignParentBottom="true"
+        android:src="@drawable/butt_select"
+        android:background="@android:color/transparent"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="81dp"
-        android:text="@string/butt_start"/>
+        android:layout_below="@id/recor_frame_layout"/>
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/butt_stop"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/butt_record"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
-        android:text="@string/butt_stop"/>
+        android:textColor="#3fd2fc"
+        android:id="@+id/record_hint"/>
+
 
 </RelativeLayout>
